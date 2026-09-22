@@ -1,0 +1,24 @@
+# Build and IDE output
+**/bin/
+**/obj/
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Local configuration and temporary files
+**/appsettings.Development.json
+**/appsettings.Local.json
+*.db
+*.db-shm
+*.db-wal
+*.rar
+.chrome-readme-capture*/
+/src/Case8.Web/wwwroot/assets/scss/
+/src/Case8.Web/wwwroot/assets/prepros.config
+/src/Case8.Web/wwwroot/assets/webfonts/
+/src/Case8.Web/wwwroot/assets/fonts/
+
+# Source theme and unrelated earlier projects
+/Project/
+/theme/

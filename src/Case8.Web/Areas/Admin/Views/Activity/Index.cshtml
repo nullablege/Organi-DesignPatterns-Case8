@@ -1,0 +1,3 @@
+@model ActivityViewModel
+@{ ViewData["Title"] = "Activity"; }
+<div class="container py-5"><h1>Order activity</h1><div class="row g-4 mt-1"><section class="col-lg-6"><h3>Notifications</h3><table class="table"><thead><tr><th>Message</th><th>Date</th></tr></thead><tbody>@foreach (var item in Model.Notifications) { <tr><td>@item.Message</td><td>@item.CreatedAt.ToLocalTime().ToString("g")</td></tr> }</tbody></table></section><section class="col-lg-6"><h3>Audit log</h3><table class="table"><thead><tr><th>Action</th><th>Date</th></tr></thead><tbody>@foreach (var item in Model.AuditLogs) { <tr><td>@item.Action</td><td>@item.CreatedAt.ToLocalTime().ToString("g")</td></tr> }</tbody></table></section></div></div>

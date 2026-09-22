@@ -1,0 +1,33 @@
+using Case8.Application;
+using Case8.Application.Shipping;
+using Case8.Application.Checkout.Validation;
+using Case8.Application.Checkout;
+using Case8.Application.Order.Observers;
+using Case8.Infrastructure.Orders.Observers;
+using Case8.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllersWithViews();
+builder.Services.AddSession();
+builder.Services.AddDbContext<StoreDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("StoreDb")));
+builder.Services.AddScoped<IStorefrontService, StorefrontService>();
+builder.Services.AddScoped<IShippingStrategy, StandardShippingStrategy>();
+builder.Services.AddScoped<IShippingStrategy, ExpressShippingStrategy>();
+builder.Services.AddScoped<IShippingStrategy, StorePickupShippingStrategy>();
+builder.Services.AddScoped<ShippingCalculator>();
+builder.Services.AddScoped<CheckoutValidationPipeline>();
+builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+builder.Services.AddScoped<ICheckoutService, CheckoutService>();
+builder.Services.AddScoped<IOrderObserver, AdminNotificationObserver>();
+builder.Services.AddScoped<IOrderObserver, AuditLogObserver>();
+builder.Services.AddScoped<OrderPlacedPublisher>();
+
+var app = builder.Build();
+if (!app.Environment.IsDevelopment()) app.UseExceptionHandler("/Home/Error");
+app.UseStaticFiles();
+app.UseRouting();
+app.UseSession();
+app.MapControllerRoute(name: "areas", pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+app.Run();

@@ -1,0 +1,3 @@
+@model Category
+@{ ViewData["Title"] = "Edit category"; }
+<div class="container py-5"><h1>Edit category</h1><form method="post" class="col-md-6"><input asp-for="Id" type="hidden"/><label asp-for="Name" class="form-label"></label><input asp-for="Name" class="form-control"/><label asp-for="ImageUrl" class="form-label mt-3">Image URL</label><input asp-for="ImageUrl" class="form-control"/><button class="btn btn-success mt-3">Save</button></form></div>
